@@ -4,7 +4,7 @@ const jwt = require('jsonwebtoken')
 const bcryptjs = require('bcryptjs')
 const conexionMysql = require('../database')
 const query = require('../models/querys')
-
+const verifyToken = require('../Auth/verifyToken')
 //Login sistem
 router.post('/login', async (req, res) => {
 
@@ -64,6 +64,9 @@ router.post('/register', async (req, res) => {
             });
         }
     })
+})
+router.get('/user',verifyToken, async (req, res) => {
+   res.send("AUTHORIZATED")
 })
 
 
